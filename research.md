@@ -34,7 +34,7 @@ This research proposes an **Institutional Trade Harness**, a modular AI governan
 * audit logging (cryptographically chained SHA-256 block ledgers)
 * model evaluation engines
 
-The framework introduces a layered architecture designed to constrain and validate AI-generated trading strategies before execution. Experimental evaluation compares unrestricted AI trading systems against harness-governed systems across multiple financial metrics.
+The framework introduces a layered architecture designed to constrain and validate AI-generated trading strategies before execution. We conduct empirical experiments comparing an **Unrestricted AI System (Group A)** against our **Harness-Governed AI System (Group B)** under identical simulated market anomalies using a synthetic deterministic SPY-like daily price sequence with an artificial correction sell-off. The results demonstrate that while the unrestricted agent suffers severe drawdown (-12.57% return, 76.16% maximum drawdown, and multiple compliance breaches), the harness-governed system successfully intercepts invalid configurations, enforces regulatory compliance, and protects investment capital—yielding a **29.05% total return with a Sharpe Ratio of 5.81, zero regulatory violations, and a maximum drawdown of only 4.94%**.
 
 The research contributes toward:
 
@@ -149,7 +149,7 @@ Kept constant.
 
 | CV                 | Description   |
 | ------------------ | ------------- |
-| Market Dataset     | Same datasets (datasets/sample_prices.csv SPY historical daily price dataset) |
+| Market Dataset     | Same datasets (datasets/sample_prices.csv synthetic deterministic SPY-like price sequence) |
 | Trading Costs      | Fixed (0.10% transaction cost per trade) |
 | Slippage           | Constant (0.05% slippage execution penalty) |
 | Hardware           | Identical     |

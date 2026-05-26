@@ -1,0 +1,37 @@
+============================================================
+RUNNING UNIT TEST SUITE (ZERO-DEPENDENCY RUNNER)
+============================================================
+
+Running tests in test_audit_engine.py...
+  [PASS] test_audit_genesis_creation
+  [PASS] test_audit_hash_chain_linkage
+  [PASS] test_audit_tampering_detection
+
+Running tests in test_backtesting_engine.py...
+  [PASS] test_backtest_return_metrics
+  [PASS] test_slippage_and_cost_deduction
+
+Running tests in test_compliance_engine.py...
+  [PASS] test_compliance_excessive_leverage
+  [PASS] test_compliance_restricted_asset
+  [PASS] test_compliance_short_sale_no_locates
+  [PASS] test_compliant_run
+
+Running tests in test_risk_engine.py...
+  [PASS] test_kill_switch_drawdown
+  [PASS] test_kill_switch_leverage
+  [PASS] test_var_cvar_calculation
+
+Running tests in test_validation_engine.py...
+  [PASS] test_ast_lookahead_shift
+  [PASS] test_ast_lookahead_subscript
+  [PASS] test_compliant_strategy
+  [PASS] test_syntax_error
+
+============================================================
+TEST EXECUTION SUMMARY
+============================================================
+Total Tests Run: 16
+Passed:          16
+Failed:          0
+============================================================

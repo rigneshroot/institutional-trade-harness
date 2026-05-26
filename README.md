@@ -75,7 +75,7 @@ pip install -r requirements.txt
 
 ### Execution
 
-Execute the complete empirical simulation run comparing **Group A (Unrestricted AI)** and **Group B (Harness-Governed AI)** on real historical SPY daily data:
+Execute the complete empirical simulation run comparing **Group A (Unrestricted AI)** and **Group B (Harness-Governed AI)** on a synthetic deterministic SPY-like daily price sequence:
 
 ```bash
 python3 run_experiments.py
