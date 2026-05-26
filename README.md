@@ -11,6 +11,9 @@ An AI-governed trading infrastructure designed to constrain, validate, and super
 
 The harness interposes a series of non-bypassable pre-trade validation checkpoints and active execution supervisors between the AI-generated strategies and the trading markets:
 
+![Institutional Trade Harness Architecture and Workflows](docs/images/trade_harness_dashboard.png)
+
+
 1. **Strategy Specification Engine:** Validates schema bounds (instruments, maximum leverage limits).
 2. **Validation Engine:** Checks for lookahead biases, AST syntax errors, and overfitting.
 3. **Backtesting Engine:** Simulates historical out-of-sample returns with real-world transaction slippage.
