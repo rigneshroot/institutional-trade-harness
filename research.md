@@ -252,6 +252,8 @@ Validates AI-generated strategies before execution.
 
 ## Validation Pipeline
 
+![Strategy Validation AST and Compliance Pipeline](docs/images/validation_pipeline.png)
+
 ```text id="vy1oxu"
 AI Strategy
     ↓

@@ -1,5 +1,8 @@
 # Institutional Trade Harness
 
+![Institutional Trade Harness Architecture and Workflows](docs/images/trade_harness_dashboard.png)
+![Strategy Validation AST and Compliance Pipeline](docs/images/validation_pipeline.png)
+
 An AI-governed trading infrastructure designed to constrain, validate, and supervise autonomous AI agents in regulated financial environments.
 
 **Author:** Rignesh P  
