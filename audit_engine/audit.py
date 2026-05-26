@@ -74,17 +74,18 @@ class AuditLoggingEngine:
         Validates the entire audit chain cryptographic linkages.
         Returns True if integral, False if tampering occurred.
         """
-        for i in range(1, len(self.chain)):
+        for i in range(len(self.chain)):
             current = self.chain[i]
-            previous = self.chain[i - 1]
             
             # Recalculate hash of current block
             if current.hash != current.calculate_hash():
                 return False
                 
-            # Verify chain linkage
-            if current.prev_hash != previous.hash:
-                return False
+            if i > 0:
+                previous = self.chain[i - 1]
+                # Verify chain linkage
+                if current.prev_hash != previous.hash:
+                    return False
                 
         return True
 
