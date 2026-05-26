@@ -11,8 +11,8 @@ An AI-governed trading infrastructure designed to constrain, validate, and super
 ---
 
 ## Technical Disclaimer
-* **Simulation Status:** Deterministic simulation demo, not live trading performance.
-* **Compliance Checks:** Rule-inspired compliance checks, not legal/regulatory certification.
+* **Simulation Status:** Deterministic simulation demo, not live trading performance. The simulator executes on a synthetic deterministic price sequence with a simulated -15% sell-off anomaly.
+* **Compliance Checks:** Rule-inspired checks mapped to SEC/FINRA/MiFID II concepts; not legal/regulatory certification.
 
 ---
 
@@ -56,10 +56,10 @@ The harness interposes a series of non-bypassable pre-trade validation checkpoin
 ```
 
 1. **Strategy Specification Engine:** Validates schema bounds (instruments, maximum leverage limits).
-2. **Validation Engine:** Checks for lookahead biases using AST parsing, syntax errors, and overfitting.
+2. **Validation Engine:** Performs AST syntax parsing + heuristic leakage detection.
 3. **Backtesting Engine:** Simulates historical out-of-sample returns with transaction costs, slippage, and Buy & Hold benchmark comparisons.
 4. **Risk Governance Engine:** Implements VaR / CVaR limits and active **Kill-Switch** protection.
-5. **Compliance Engine:** Prevents trading of restricted assets and enforces rule-inspired baseline safety standards.
+5. **Compliance Engine:** Enforces rule-inspired checks mapped to SEC/FINRA/MiFID II concepts; not legal/regulatory certification.
 6. **Audit Logging Engine:** Chains state transitions cryptographically (SHA-256) into an immutable audit ledger.
 7. **Reproducibility Engine:** Hardlocks global seeds and audits system environment configurations.
 8. **Deployment Controller:** Manages Canary Rollouts (10% starting exposure) and emergency rollbacks.
@@ -78,7 +78,7 @@ pip install -r requirements.txt
 
 ### Execution
 
-Execute the complete empirical simulation run comparing **Group A (Unrestricted AI)** and **Group B (Harness-Governed AI)** on a synthetic deterministic SPY-like daily price sequence:
+Execute the complete empirical simulation run comparing **Group A (Unrestricted AI)** and **Group B (Harness-Governed AI)**:
 
 ```bash
 python3 run_experiments.py
@@ -94,18 +94,18 @@ python3 run_tests.py
 
 ### Empirical Results
 
-Running the simulator prints the comparative performance matrix under a historical SPY pricing sequence including a correction sell-off:
+Running the simulator prints the comparative performance matrix under a synthetic deterministic price sequence with a simulated -15% sell-off anomaly:
 
 ```
-Metric                       Group A (Unrestricted)  Group B (Governed)    Buy & Hold (SPY)
--------------------------------------------------------------------------------------------
-Sharpe Ratio                 0.22                    5.81                  3.06
-Sortino Ratio                0.15                    7.12                  N/A
-Max Drawdown                 76.16%                  4.94%                  15.78%
-Compliance Violations        3                       0                       0
-Operational Failures         1                       0                       0
-Governance Score             10.0%                  100.0%                  100.0%
-Final Portfolio Capital      $874,262.51          $1,290,476.10          $1,271,285.89
+Metric                       Group A (Unrestricted)  Group B (Governed)
+-----------------------------------------------------------------------
+Sharpe Ratio                 0.12                    1.84
+Sortino Ratio                0.08                    2.12
+Max Drawdown                 99.95%                  3.59%
+Compliance Violations        3                       0
+Operational Failures         1                       0
+Governance Score             10.0%                  100.0%
+Final Portfolio Capital      $781.79          $1,084,409.85
 ```
 
 For a comprehensive analysis, review the [research.md](research.md) paper.

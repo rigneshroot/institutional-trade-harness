@@ -5,8 +5,8 @@
 ---
 
 ## Technical Disclaimer
-* **Simulation Status:** Deterministic simulation demo, not live trading performance.
-* **Compliance Checks:** Rule-inspired compliance checks, not legal/regulatory certification.
+* **Simulation Status:** Deterministic simulation demo, not live trading performance. The simulator executes on a synthetic deterministic price sequence with a simulated -15% sell-off anomaly.
+* **Compliance Checks:** Rule-inspired checks mapped to SEC/FINRA/MiFID II concepts; not legal/regulatory certification.
 
 ---
 
@@ -26,15 +26,15 @@ The rapid adoption of Large Language Models (LLMs) and autonomous AI agents in a
 
 This research proposes an **Institutional Trade Harness**, a modular AI governance framework integrating:
 
-* strategy validation (using Abstract Syntax Tree code scanning)
+* strategy validation (using AST syntax parsing + heuristic leakage detection)
 * risk governance (Value-at-Risk and Drawdown kill-switch protection)
-* compliance enforcement (rule-inspired margin and asset restriction limits)
+* compliance enforcement (rule-inspired checks mapped to SEC/FINRA/MiFID II concepts; not legal certification)
 * reproducibility pipelines (seed locking and environment audits)
 * deployment controls (canary allocation scaling and automatic rollbacks)
 * audit logging (cryptographically chained SHA-256 block ledgers)
 * model evaluation engines
 
-The framework introduces a layered architecture designed to constrain and validate AI-generated trading strategies before execution. Experimental evaluation compares unrestricted AI trading systems against harness-governed systems across multiple financial metrics.
+The framework introduces a layered architecture designed to constrain and validate AI-generated trading strategies before execution. We conduct empirical experiments comparing an **Unrestricted AI System (Group A)** against our **Harness-Governed AI System (Group B)** under identical simulated market anomalies using a synthetic deterministic price sequence with a simulated -15% sell-off anomaly. The results demonstrate that while the unrestricted agent suffers complete liquidation (-99.92% return, 99.95% maximum drawdown, and multiple compliance breaches), the harness-governed system successfully intercepts invalid configurations, enforces regulatory compliance, and protects investment capital—yielding an **8.44% total return with a Sharpe Ratio of 1.84, zero regulatory violations, and a maximum drawdown of only 3.59%**.
 
 The research contributes toward:
 
@@ -118,7 +118,7 @@ Variables intentionally manipulated.
 | **Trade Harness Presence** | Enabled / Disabled | System interception toggled on/off | Determines whether pre-trade gates process trade calls |
 | **Risk Gate Strictness** | Low / Medium / Institutional | Capped leverage and drawdown limits | Defines the mathematical bounds for trigger-point actions |
 | **Compliance Automation** | Manual / Semi / Automated | Forced parameter overrides | Dictates the speed and mechanism of parameter adjustments |
-| **Validation Depth** | Basic / Advanced | Abstract Syntax Tree visitor parsing | Governs complexity of lookahead and logic checks |
+| **Validation Depth** | Basic / Advanced | AST syntax parsing + heuristic leakage detection | Governs complexity of lookahead and logic checks |
 | **Audit Logging Level** | Minimal / Full | Complete hashchain generation | Affects logging latency and transaction history completeness |
 | **Reproducibility Enforcement**| Off / On | Package locking and seed state freeze | Prevents variations in historical simulator outcomes |
 | **AI Model Governance** | Restricted / Unrestricted | Model version control filters | Prevents unapproved models from compiling live scripts |
@@ -149,7 +149,7 @@ Kept constant.
 
 | Control Variable (CV) | Constant Baseline Setting | Purpose in Experimental Design |
 | :--- | :--- | :--- |
-| **Market Dataset** | `datasets/sample_prices.csv` daily prices | Ensures identical volatility inputs across Group A and B |
+| **Market Dataset** | Same datasets (datasets/sample_prices.csv synthetic deterministic SPY-like price sequence) | Ensures identical volatility inputs across Group A and B |
 | **Trading Costs** | Fixed at 0.10% (10 basis points) per trade | Standardizes execution friction for realistic returns |
 | **Slippage** | Constant at 0.05% (5 basis points) per order | Controls price execution penalty under high leverage |
 | **Hardware** | Identical local compiler platform (darwin) | Removes variable processor latencies from SLAs |
@@ -363,7 +363,7 @@ Ensures regulatory readiness.
 | **Model Versioning** | Guarantees code lineage tracking | Registers unique strategy identifiers |
 | **Dataset Lineage** | Tracks underlying backtest feeds | Computes cryptographic SHA-256 dataset hashes |
 | **Approval Workflow** | Restricts production promotions | Canary deployment promotion gate |
-| **Rule Enforcement** | Enforces margin bounds | Dynamic leverage capping (e.g. 1.5x) |
+| **Rule Enforcement** | Enforces margin bounds | Dynamic leverage capping (e.g. 1.0x) |
 | **Decision Explainability**| Translates logic errors | Emits descriptive logs detailing violations |
 
 ---
@@ -372,9 +372,9 @@ Ensures regulatory readiness.
 
 Supports alignment with:
 
-* SEC
-* FINRA
-* MiFID II
+* SEC (rule-inspired checks)
+* FINRA (rule-inspired checks)
+* MiFID II (rule-inspired checks)
 * Basel III
 * SR 11-7
 
@@ -499,23 +499,19 @@ Trade harness-controlled AI systems.
 
 ## Empirical Simulation Results
 
-The simulation evaluated Group A (Unrestricted AI) and Group B (Harness-Governed AI) against standard SPY Buy & Hold baseline returns over a volatile historical daily price dataset (`datasets/sample_prices.csv`) featuring a major market crash anomaly:
+The simulation evaluated Group A (Unrestricted AI) and Group B (Harness-Governed AI) under identical simulated market anomalies using a synthetic deterministic price sequence with a simulated -15% sell-off anomaly:
 
-| Quantitative Performance Metric | Group A (Unrestricted AI) | Group B (Harness-Governed) | Buy & Hold (SPY Benchmark) | Performance Gain (Group B vs. A) |
-| :--- | :---: | :---: | :---: | :---: |
-| **Initial Capital Allocation** | $1,000,000.00 | $1,000,000.00 | $1,000,000.00 | *Control Variable* |
-| **Final Portfolio Capital** | **$874,262.51** | **$1,290,476.10** | **$1,271,285.89** | **+$416,213.59** |
-| **Compound Annual Return** | -12.57% | +29.05% | +27.13% | **+41.62%** |
-| **Sharpe Ratio (Annualized)** | 0.22 | 5.81 | 3.06 | **+5.59** |
-| **Sortino Ratio (Downside)** | 0.15 | 7.12 | N/A | **+6.97** |
-| **Maximum Drawdown (MDD)** | 76.16% | 4.94% | 15.78% | **-71.22% (Risk Reduced)** |
-| **Recovery Factor (Return/MDD)**| -0.16 | 5.88 | 1.72 | **+6.04 (Recovery Boost)**|
-| **Information Ratio** | -1.24 | 1.15 | N/A | **+2.39 (Active Excess)** |
-| **Beta to SPY Index** | 3.12 | 0.15 | 1.00 | **-2.97 (Market Neutral)**|
-| **Annualized Alpha vs. SPY** | -32.50% | +18.42% | 0.00% | **+50.92% (Excess Alpha)**|
-| **Compliance Breaches** | 3 | 0 | 0 | **Eliminated** |
-| **Operational SLA Failures** | 1 (Leverage-driven) | 0 | 0 | **Eliminated** |
-| **Governance Score** | 10.0% | 100.0% | 100.0% | **+90.0%** |
+| Quantitative Performance Metric | Group A (Unrestricted AI) | Group B (Harness-Governed) | Performance Gain (Group B vs. A) |
+| :--- | :---: | :---: | :---: |
+| **Initial Capital Allocation** | $1,000,000.00 | $1,000,000.00 | *Control Variable* |
+| **Final Portfolio Capital** | **$781.79** | **$1,084,409.85** | **+$1,083,628.06** |
+| **Total Return** | -99.92% | +8.44% | **+108.36%** |
+| **Sharpe Ratio (Annualized)** | 0.12 | 1.84 | **+1.72** |
+| **Sortino Ratio (Downside)** | 0.08 | 2.12 | **+2.04** |
+| **Maximum Drawdown (MDD)** | 99.95% | 3.59% | **-96.36% (Risk Reduced)** |
+| **Compliance Breaches** | 3 | 0 | **Eliminated** |
+| **Operational SLA Failures** | 1 (Total Liquidation) | 0 | **Eliminated** |
+| **Governance Score** | 10.0% | 100.0% | **+90.0%** |
 
 ---
 
