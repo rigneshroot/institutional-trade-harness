@@ -596,9 +596,25 @@ institutional-trade-harness/
 
 This research contributes to:
 
-* Institutional AI governance
-* Financial AI safety
-* Autonomous trading controls
-* Reproducible AI systems
-* AI risk engineering
+* Institutional AI governance [5]
+* Financial AI safety [5]
+* Autonomous trading controls [1]
+* Reproducible AI systems [6]
+* AI risk engineering [1]
 * Quantitative governance infrastructure and README.md
+
+---
+
+# 16. References
+
+[1] Board of Governors of the Federal Reserve System & Office of the Comptroller of the Currency. (2011). *Supervisory Guidance on Model Risk Management* (SR Letter 11-7). Federal Reserve Board.
+
+[2] European Securities and Markets Authority (ESMA). (2014). *Directive 2014/65/EU on Markets in Financial Instruments (MiFID II)*. Official Journal of the European Union.
+
+[3] Sharpe, William F. (1994). The Sharpe Ratio. *Journal of Portfolio Management*, 21(1), 49-58.
+
+[4] Sortino, Frank A., & Price, Lee N. (1994). Performance Measurement Using Downside Risk. *Journal of Portfolio Management*, 20(4), 59-64.
+
+[5] Amodei, Dario, Olah, Chris, Steinhardt, Jacob, Christiano, Paul, Schulman, John, & Mané, Dan. (2016). Concrete Problems in AI Safety. *arXiv preprint arXiv:1606.06565*.
+
+[6] Lopez de Prado, Marcos. (2018). *Advances in Financial Machine Learning*. John Wiley & Sons.
